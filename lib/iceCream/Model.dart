@@ -10,6 +10,9 @@ class _IceCream {
 
   @Column(nullable: true)
   String type;
+
+  @Column(nullable: true)
+  double price;
 }
 
 class IceCream extends ManagedObject<_IceCream> implements _IceCream {}

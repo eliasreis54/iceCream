@@ -1,5 +1,4 @@
 import 'package:dojo/iceCream/routes.dart';
-import 'model/model.dart';
 import 'dojo.dart';
 
 /// This type initializes an application.
@@ -32,8 +31,6 @@ class DojoChannel extends ApplicationChannel {
   @override
   Controller get entryPoint {
     final router = Router();
-
-    router.route("/model/[:id]").link(() => ManagedObjectController<Model>(context));
 
     router
         .route("/icecreams/[:id]")

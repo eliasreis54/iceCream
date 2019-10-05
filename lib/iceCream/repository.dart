@@ -1,5 +1,4 @@
 import 'package:aqueduct/aqueduct.dart';
-
 import './Model.dart';
 
 class IceCreamRepository {
@@ -17,13 +16,5 @@ class IceCreamRepository {
   Future<List<IceCream>> fetchAll() async {
     final query = Query<IceCream>(context);
     return await query.fetch();
-  }
-
-  Future<IceCream> update(IceCream iceCream, int id) async {
-    final query = Query<IceCream>(context)
-        ..values = iceCream
-        ..where((iceCream) => iceCream.id).equalTo(id);
-
-    return await query.updateOne();
   }
 }
