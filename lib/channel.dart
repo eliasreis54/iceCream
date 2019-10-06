@@ -1,4 +1,7 @@
 import 'package:dojo/iceCream/routes.dart';
+import 'package:dojo/person/routes.dart';
+import 'package:dojo/person/middleware.dart';
+
 import 'dojo.dart';
 
 /// This type initializes an application.
@@ -35,6 +38,11 @@ class DojoChannel extends ApplicationChannel {
     router
         .route("/icecreams/[:id]")
         .link(() => IceCreamController(context));
+    
+    router
+        .route("/person/[:id]")
+        .link(() => PersonMiddleware())
+        .link(() => PersonController(context));
 
     return router;
   }

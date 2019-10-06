@@ -12,12 +12,10 @@ class IceCreamController extends ResourceController {
     if (id == null) {
       return Response.badRequest(body: { "message": "id must be defined" });
     }
-
     final iceCream = await IceCreamRepository(context).findById(id);
     if (iceCream == null) {
       return Response.notFound(body: { "message": "icreCream not found" });
     }
-
     return null;
   }
 
@@ -35,21 +33,30 @@ class IceCreamController extends ResourceController {
 
   @Operation.get("id")
   Future<Response> getSpecifIceCream(@Bind.path("id") int id) async {
-    await validateRequest(id); 
+    final staus = await validateRequest(id);
+    if (staus != null) {
+      return staus;
+    }
     final icreCream = await IceCreamRepository(context).findById(id);
     return Response.ok(icreCream);
   }
 
   @Operation.put("id")
   Future<Response> updateIceCream(@Bind.path("id") int id, @Bind.body() IceCream iceCream) async {
-    await validateRequest(id); 
+    final staus = await validateRequest(id);
+    if (staus != null) {
+      return staus;
+    }
     final update = await IceCreamService(context).update(iceCream, id);
     return Response.ok(update);
   }
 
   @Operation.delete("id")
   Future<Response> deleteIceCream(@Bind.path("id") int id) async {
-    await validateRequest(id);
+    final staus = await validateRequest(id);
+    if (staus != null) {
+      return staus;
+    }
     await IceCreamService(context).deleteIceCream(id);
     return Response.noContent();
   }
